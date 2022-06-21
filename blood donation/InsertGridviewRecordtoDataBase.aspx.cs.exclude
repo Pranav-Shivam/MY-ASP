@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+    public partial class InsertGridviewRecordtoDataBase: System.Web.UI.Page
+    {
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void btn_add_Click(object sender, EventArgs e)
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.Add("EmpID");
+        dt.Columns.Add("EmpName");
+        dt.Columns.Add("EmpSal");
+        DataRow dr = null;
+        if (ViewState["emp"] != null)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                dt = (DataTable)ViewState["emp"];
+                if (dt.Rows.Count > 0)
+                {
+                    dr = dt.NewRow();
+                    dr["EmpID"] = txtempid.Text;
+                    dr["EmpName"] = txtempname.Text;
+                    dr["EmpSal"] = txtempsalary.Text;
+                    dt.Rows.Add(dr);
+                    //GridView.DataSource = dt;
+                    //GridView.DataBind();
+                }
+            }
+        }
+        else
+        {
+            dr = dt.NewRow();
+            dr["EmpID"] = txtempid.Text;
+            dr["EmpName"] = txtempname.Text;
+            dr["EmpSal"] = txtempsalary.Text;
+            dt.Rows.Add(dr);
+           // GridView.DataSource = dt;
+            //GridView.DataBind();
+        }
+        ViewState["emp"] = dt;
+
+    }
+}
